@@ -9,10 +9,27 @@ from datetime import date
 from typing import Dict
 import dropbox
 import os
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
 today = date.today()
+
+origins = [
+    "https://ticdrive-ciclo3.herokuapp.com",
+    "https://localhost.tiangolo.com",
+    "http://localhost",
+    "http://localhost:8081",
+    "http://localhost:8081"
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 database_docs = Dict[str, DocInDB]
 database_docs = {
